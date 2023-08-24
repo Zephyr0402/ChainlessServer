@@ -1,0 +1,22 @@
+{
+  "name": "create-chainless-expressjs-app",
+  "version": "1.0.0",
+  "description": "This package is to create expressJS app with web3 helper libraries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zephyr0402/ChainlessServer.git"
+  },
+  "author": "Shijun Shen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zephyr0402/ChainlessServer/issues"
+  },
+  "homepage": "https://github.com/Zephyr0402/ChainlessServer#readme",
+  "bin": {
+    "create-chainless-expressjs-app": "./bin/create-chainless-expressjs-app.js"
+  }
+}

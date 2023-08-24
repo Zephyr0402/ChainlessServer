@@ -15,3 +15,6 @@ It is designed that the developer can use ChainlessServer to directly access the
 * Database connection built-in or let user choose?
 * Multi-smart contracts (NFT and others...)
 * Read from ipfs (metadata, pic uri...)
+
+# Demo command
+create-chainless-expressjs-app mydemoapp ../demo/SampleJSON/SampleContracts.json ../demo

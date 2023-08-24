@@ -1,0 +1,12 @@
+[
+    { 
+        "path": "/Users/Bevis/Local-Files/EECE597/ChainlessJS/demo/SampleJSON/Contracts/GobangUserProfile.json", 
+        "address": "0x3b7799B6C9E677e3d4eef30Dc7b6672b26EF11Ab", 
+        "name": "GobangUserProfile"
+    },
+    { 
+        "path": "/Users/Bevis/Local-Files/EECE597/ChainlessJS/demo/SampleJSON/Contracts/MemoryGameProfile.json", 
+        "address": "0x6f13891DbD3D00503CD5cBD283a6e375Bc80E4EB", 
+        "name": "MemoryGameProfile"
+    }
+]
