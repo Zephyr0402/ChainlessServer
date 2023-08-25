@@ -20,7 +20,7 @@ function copyScripts(appPath) {
         fs.mkdirSync(chainlessServerFolder);
     }
     fs.copyFileSync(path.resolve(__dirname, '..', 'scripts', 'Web3Helper.js'), path.join(chainlessServerFolder, 'Web3Helper.js'));
-    fs.copyFileSync(path.resolve(__dirname, '..', 'scripts', 'ipfsUtils.js'), path.join(chainlessServerFolder, 'ipfsUtils.js'));
+    fs.copyFileSync(path.resolve(__dirname, '..', 'scripts', 'IpfsUtils.js'), path.join(chainlessServerFolder, 'IpfsUtils.js'));
 }
 
 function copyContracts(appPath, contracts) {
@@ -38,7 +38,8 @@ function copyContracts(appPath, contracts) {
 function installDependencies(appPath) {
     const dependencies = [
         'express@^4.18.2',
-        'web3@^1.10.0'
+        'web3@^1.10.0',
+        'ipfs-http-client'
     ];
 
     execSync(`npm install ${dependencies.join(' ')}`, { stdio: 'inherit', cwd: appPath });
