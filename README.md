@@ -28,6 +28,6 @@ The library assumes that the user has compiled and deployed. The contract name, 
 
 <code>npm test</code>
 
-# Get the library from npmjs.com
+# Get the library from npmjs.com ([create-chainless-expressjs-app](https://www.npmjs.com/package/create-expressjs-react-app))
 
 <code>npm i create-chainless-expressjs-app</code>
