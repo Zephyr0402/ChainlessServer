@@ -4,7 +4,7 @@
   "description": "This package is to create expressJS app with web3 helper libraries",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Zephyr0402/ChainlessServer#readme",
   "bin": {
     "create-chainless-expressjs-app": "./bin/create-chainless-expressjs-app.js"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4"
   }
 }

@@ -29,9 +29,16 @@ function copyContracts(appPath, contracts) {
         fs.mkdirSync(abiFolder);
     }
 
+    const chainlessFolder = path.join(appPath, 'ChainlessServer');
+    if (!fs.existsSync(chainlessFolder)) {
+        fs.mkdirSync(chainlessFolder);
+    }
+
     contracts.forEach(contract => {
         const contractDestination = path.join(abiFolder, path.basename(contract.path));
         fs.copyFileSync(contract.path, contractDestination);
+        const code = generateContractCode(contract.name, contract.address, contract.path);
+        fs.writeFileSync(path.join(chainlessFolder, `${contract.name}.js`), code);
     });
 }
 
@@ -73,4 +80,13 @@ function main() {
     installDependencies(appPath);
 }
 
-main();
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    createExpressApp,
+    copyScripts,
+    copyContracts,
+    installDependencies
+};

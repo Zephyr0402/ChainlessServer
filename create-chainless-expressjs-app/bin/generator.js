@@ -6,7 +6,7 @@ function generateContractCode(contractName, contractAddress, contractFilePath) {
 
     // Start generating the skeleton
     let code = `import Web3 from 'web3';\n`;
-    code += `import contractJSON from '../ABI/${path.basename(contractFilePath)}';\n`; 
+    code += `import contractJSON from '../ABI/${path.basename(contractFilePath)}';\n`;  
     code += `export class ${contractName} {\n`;
     code += `  constructor() {\n`;
     code += `     this.web3 = null;\n`;
