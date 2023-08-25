@@ -24,6 +24,15 @@ export class Web3Helper {
         }
     }
 
+    async getNetworkId() {
+        if (!this.checkWeb3()) {
+            return null;
+        } else {
+            const networkId = await this.web3.eth.net.getId();
+            return networkId;
+        }
+    }
+
     async getAccounts() {
         if (!this.checkWeb3()) {
             return null;
@@ -31,6 +40,15 @@ export class Web3Helper {
             console.log(this.web3);
             const userAccounts = await this.web3.eth.getAccounts();
             return userAccounts;
+        }
+    }
+
+    async getBalance(address) {
+        if (!this.checkWeb3()) {
+            return null;
+        } else {
+            const balance = await this.web3.eth.getBalance(address);
+            return this.web3.utils.fromWei(balance, 'ether');
         }
     }
 
