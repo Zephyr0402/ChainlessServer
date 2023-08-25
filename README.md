@@ -7,14 +7,27 @@ It is designed that the developer can use ChainlessServer to directly access the
 1. User initalize a project structure and generate skeleton code by reading abis of smart contract.
 2. Generate methods based on abis
 3. Generate ExpressJS file structure
-4. Initialize Agent (an instance of chainless class) with user account address and smart contract address
+4. Generate Web3Helper.js and IpfsUtils.js file
 
-# Current problem
+# Setup smart contract JSON files first
+The library assumes that the user has compiled and deployed. The contract name, deployed address on the blockchain and contract JSON file should be stored in a seperated JSON file following the format of the <code>demo/SampleJSON/SampleContracts.json</code>.
 
-* Is there a need intergrate a HTTP server inside backend library? multi-http server support using Yeoman
-* Database connection built-in or let user choose?
-* Multi-smart contracts (NFT and others...)
-* Read from ipfs (metadata, pic uri...)
+# How to run it under local development environment
 
-# Demo command
-create-chainless-expressjs-app mydemoapp ../demo/SampleJSON/SampleContracts.json ../demo
+<code>cd create-chainless-expressjs-app</code>
+
+<code>npm install</code>
+
+<code>npm link</code>
+
+<code>create-chainless-expressjs-app mydemoapp ../demo/SampleJSON/SampleContracts.json ../demo</code>
+
+# How to run test
+
+<code>cd create-chainless-expressjs-app</code>
+
+<code>npm test</code>
+
+# Get the library from npmjs.com
+
+<code>npm i create-chainless-expressjs-app</code>
