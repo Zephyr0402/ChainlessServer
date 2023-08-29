@@ -3,13 +3,12 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { createExpressApp, copyScripts, copyContracts, installDependencies, } = require('../bin/create-chainless-expressjs-app'); 
 
-jest.mock('../bin/generator', () => jest.fn(() => 'mocked code'));
-
+jest.mock('../bin/generator', () => jest.fn(() => 'mock code'));
 jest.mock('fs');
 jest.mock('child_process');
 jest.mock('path');
 
-describe('create-chainless-express-app functions', () => {
+describe('create-chainless-expressjs-app functions', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -17,7 +16,7 @@ describe('create-chainless-express-app functions', () => {
     });
 
     describe('createExpressApp', () => {
-        it('the function should run the express-generator command', () => {
+        it('The function should run the express-generator command', () => {
             const appName = 'testApp';
             const targetFolder = './testApp';
             const expectedCommand = `npx express-generator ${appName}`;
@@ -29,13 +28,13 @@ describe('create-chainless-express-app functions', () => {
     });
 
     describe('copyScripts', () => {
-        it('the function should create a ChainlessServer directory in expressjs folder if it does not exist', () => {
+        it('The function should create a ChainlessServer directory in the ExpressJS folder if it does not exist', () => {
             fs.existsSync.mockReturnValue(false);
             copyScripts('./testApp');
             expect(fs.mkdirSync).toHaveBeenCalledWith('./testApp/ChainlessServer');
         });
 
-        it('the function should copy Web3Helper.js and IpfsUtils.jsto the ChainlessServer directory', () => {
+        it('The function should copy Web3Helper.js and IpfsUtils.js to the ChainlessServer directory', () => {
             copyScripts('./testApp');
             expect(fs.copyFileSync).toHaveBeenCalledTimes(2);
         });
@@ -55,18 +54,18 @@ describe('create-chainless-express-app functions', () => {
             },
         ];
 
-        it('the function should create ABI directory in expressjs folder if it does not exist', () => {
+        it('The function should create an ABI directory in the ExpressJS folder if it does not exist', () => {
             fs.existsSync.mockReturnValue(false);
             copyContracts('./testApp', mockContractConfig);
             expect(fs.mkdirSync).toHaveBeenCalledWith('./testApp/ABI');
         });
 
-        it('the function should copy contract files to the ABI directory', () => {
+        it('The function should copy smart contract ABI JSON files to the ABI directory', () => {
             copyContracts('./testApp', mockContractConfig);
             expect(fs.copyFileSync).toHaveBeenCalledTimes(mockContractConfig.length);
         });
 
-        it('the function should generate javascript files for each contract and copy them to the ChainlessServer folder', () => {
+        it('The function should generate javascript class files for each contract and copy them to the ChainlessServer folder', () => {
             copyContracts('./testApp', mockContractConfig);
             expect(fs.copyFileSync).toHaveBeenCalledTimes(mockContractConfig.length);
             expect(fs.writeFileSync).toHaveBeenCalledWith('./testApp/ChainlessServer/Contract1.js', expect.any(String));
@@ -75,7 +74,7 @@ describe('create-chainless-express-app functions', () => {
     });
 
     describe('installDependencies', () => {
-        it('should install the necessary npm packages', () => {
+        it('The function should install the necessary NPM packages', () => {
             const appPath = './testApp';
             const expectedDeps = [
                 'express@^4.18.2',

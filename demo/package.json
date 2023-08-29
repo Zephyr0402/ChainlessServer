@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "create-chainless-expressjs-app": "^1.0.1"
+  }
+}

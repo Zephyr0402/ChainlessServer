@@ -5,15 +5,34 @@ const path = require('path');
 const { execSync } = require('child_process');
 const generateContractCode = require('./generator');
 
+// Create an ExpressJS application
 function createExpressApp(appName, targetFolder) {
-    const command = `npx express-generator ${appName}`;
+    const cmd = `npx express-generator ${appName}`;
     if (targetFolder) {
-        execSync(command, { stdio: 'inherit', cwd: targetFolder });
+        execSync(cmd, { stdio: 'inherit', cwd: targetFolder });
     } else {
-        execSync(command, { stdio: 'inherit' });
+        execSync(cmd, { stdio: 'inherit' });
     }
 }
 
+// Add sample imports to app.js
+function addImportsToAppJs(appPath, contractNames) {
+    const appJSPath = path.join(appPath, 'app.js');
+    let appJSContent = fs.readFileSync(appJSPath, 'utf-8');
+
+    const sampleImports = [
+        "var web3authHelper = require(i'./ChainlessJS/Web3authHelper');",
+        "var web3Helper = require('./ChainlessJS/Web3Helper');",
+        "var ipfsUtils = require('./ChainlessJS/IpfsUtils');"
+    ];
+
+    const contractImports = contractNames.map(name => `var ${name} = require('./ChainlessServer/${name}.js');`);
+    appJSContent = sampleImports.concat(contractImports).join("\n") + "\n\n" + appJSContent;
+
+    fs.writeFileSync(appJSPath, appJSContent);
+}
+
+// Copy the Web3 helper scripts to the target folder
 function copyScripts(appPath) {
     const chainlessServerFolder = path.join(appPath, 'ChainlessServer');
     if (!fs.existsSync(chainlessServerFolder)) {
@@ -23,6 +42,7 @@ function copyScripts(appPath) {
     fs.copyFileSync(path.resolve(__dirname, '..', 'scripts', 'IpfsUtils.js'), path.join(chainlessServerFolder, 'IpfsUtils.js'));
 }
 
+// Copy contract ABIs and generate contract class JS scripts in the ChainlessServer folder
 function copyContracts(appPath, contracts) {
     const abiFolder = path.join(appPath, 'ABI');
     if (!fs.existsSync(abiFolder)) {
@@ -35,13 +55,14 @@ function copyContracts(appPath, contracts) {
     }
 
     contracts.forEach(contract => {
-        const contractDestination = path.join(abiFolder, path.basename(contract.path));
-        fs.copyFileSync(contract.path, contractDestination);
+        const contractDest= path.join(abiFolder, path.basename(contract.path));
+        fs.copyFileSync(contract.path, contractDest);
         const code = generateContractCode(contract.name, contract.address, contract.path);
         fs.writeFileSync(path.join(chainlessFolder, `${contract.name}.js`), code);
     });
 }
 
+// Install NPM dependencies
 function installDependencies(appPath) {
     const dependencies = [
         'express@^4.18.2',
@@ -52,6 +73,7 @@ function installDependencies(appPath) {
     execSync(`npm install ${dependencies.join(' ')}`, { stdio: 'inherit', cwd: appPath });
 }
 
+// main
 function main() {
     if (process.argv.length < 4) {
         console.error('Please provide an app name and path to the JSON configuration file.');
@@ -68,14 +90,16 @@ function main() {
         process.exit(1);
     }
 
-    const rawConfig = fs.readFileSync(JSONConfigPath, 'utf-8');
-    const config = JSON.parse(rawConfig);
+    const config = JSON.parse(fs.readFileSync(JSONConfigPath, 'utf-8'));
 
     createExpressApp(appName, targetFolder);
     
     copyScripts(appPath);
     
     copyContracts(appPath, config);
+
+    const contractNames = config.map(contract => contract.name);
+    addImportsToAppJs(appPath, contractNames);
 
     installDependencies(appPath);
 }

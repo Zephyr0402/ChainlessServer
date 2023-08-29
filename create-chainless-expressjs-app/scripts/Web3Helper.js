@@ -6,16 +6,19 @@ export class Web3Helper {
         this.authProvider = null;
     }
 
+    // Get web3 instance
     getWeb3Instance() {
         return this.web3;
     }
 
+    // Create a web3 instance with given authentication provider
     createWeb3Instance(authProvider) {
         this.authProvider = authProvider;
         this.web3 = new Web3(this.authProvider);
         return this.web3;
     }
 
+    // Check if there is web3 instance
     checkWeb3() {
         if (this.web3 == null) {
             return false; 
@@ -24,6 +27,7 @@ export class Web3Helper {
         }
     }
 
+    // Get the network id of current chain
     async getNetworkId() {
         if (!this.checkWeb3()) {
             return null;
@@ -33,6 +37,7 @@ export class Web3Helper {
         }
     }
 
+    // Get accounts of the current user
     async getAccounts() {
         if (!this.checkWeb3()) {
             return null;
@@ -42,7 +47,8 @@ export class Web3Helper {
             return userAccounts;
         }
     }
-
+    
+    // Get balance in ether of given account address
     async getBalance(address) {
         if (!this.checkWeb3()) {
             return null;

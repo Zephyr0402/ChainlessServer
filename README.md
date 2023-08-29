@@ -30,4 +30,8 @@ The library assumes that the user has compiled and deployed. The contract name, 
 
 # Get the library from npmjs.com ([create-chainless-expressjs-app](https://www.npmjs.com/package/create-chainless-expressjs-app))
 
+<code>cd demo/</code>
+
 <code>npm i create-chainless-expressjs-app</code>
+
+<code>create-chainless-expressjs-app mydemoapp-from-npm ./SampleJSON/SampleContracts.json ./</code>
