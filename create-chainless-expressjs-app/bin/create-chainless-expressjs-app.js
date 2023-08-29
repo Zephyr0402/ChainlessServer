@@ -67,7 +67,7 @@ function installDependencies(appPath) {
     const dependencies = [
         'express@^4.18.2',
         'web3@^1.10.0',
-        'ipfs-http-client'
+        'ipfs-http-client@^60.0.1'
     ];
 
     execSync(`npm install ${dependencies.join(' ')}`, { stdio: 'inherit', cwd: appPath });

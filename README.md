@@ -9,6 +9,25 @@ It is designed that the developer can use ChainlessServer to directly access the
 3. Generate ExpressJS file structure
 4. Generate Web3Helper.js and IpfsUtils.js file
 
+# How to deploy smart contracts (Optional, the demo-used contracts are deployed in advanced)
+1. Instal npm dependencies
+
+<code>cd contracts/GobangUserProfile</code>
+
+<code>npm install</code>
+
+2. Enter your mnemonic in the truffle-config.js
+
+<code>vim truffle-config.js</code>
+
+3. Compile and migrate the smart contract
+
+<code>truffle compile</code>
+
+<code>truffle migrate --network matic</code>
+
+4. Repeat the steps for MemoryGameProfile smart contract
+
 # Setup smart contract JSON files first
 The library assumes that the user has compiled and deployed. The contract name, deployed address on the blockchain and contract JSON file should be stored in a seperated JSON file following the format of the <code>demo/SampleJSON/SampleContracts.json</code>.
 
