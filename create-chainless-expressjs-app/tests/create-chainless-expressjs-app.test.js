@@ -79,15 +79,12 @@ describe('create-chainless-expressjs-app functions', () => {
             const expectedDeps = [
                 'express@^4.18.2',
                 'web3@^1.10.0',
-                'ipfs-http-client'
+                'ipfs-http-client@^52.0.0'
             ];
 
             installDependencies(appPath);
 
-            expect(execSync).toHaveBeenCalledWith(`npm install ${expectedDeps.join(' ')}`, {
-                stdio: 'inherit',
-                cwd: appPath
-            });
+            expect(execSync).toHaveBeenCalledWith(`npm install ${expectedDeps.join(' ')}`, { stdio: 'inherit', cwd: appPath });
         });
     });
 });

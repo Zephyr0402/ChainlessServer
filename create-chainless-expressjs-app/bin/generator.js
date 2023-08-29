@@ -5,9 +5,8 @@ function generateContractCode(contractName, contractAddress, contractFilePath) {
     const contractJSON = JSON.parse(fs.readFileSync(contractFilePath, 'utf8'));
 
     // Start generating the skeleton
-    let code = `import Web3 from 'web3';\n`;
-    code += `import contractJSON from '../ABI/${path.basename(contractFilePath)}';\n`;  
-    code += `export default class ${contractName} {\n`;
+    let code = `const contractJSON = require('../ABI/${path.basename(contractFilePath)}');\n`;  
+    code += `class ${contractName} {\n`;
     code += `  constructor() {\n`;
     code += `     this.web3 = null;\n`;
     code += `     this.contract = null;\n`;

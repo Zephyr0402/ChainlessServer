@@ -21,9 +21,8 @@ function addImportsToAppJs(appPath, contractNames) {
     let appJSContent = fs.readFileSync(appJSPath, 'utf-8');
 
     const sampleImports = [
-        "var web3authHelper = require(i'./ChainlessJS/Web3authHelper');",
-        "var web3Helper = require('./ChainlessJS/Web3Helper');",
-        "var ipfsUtils = require('./ChainlessJS/IpfsUtils');"
+        "var web3Helper = require('./ChainlessServer/Web3Helper');",
+        "var ipfsUtils = require('./ChainlessServer/IpfsUtils');"
     ];
 
     const contractImports = contractNames.map(name => `var ${name} = require('./ChainlessServer/${name}.js');`);
@@ -67,7 +66,7 @@ function installDependencies(appPath) {
     const dependencies = [
         'express@^4.18.2',
         'web3@^1.10.0',
-        'ipfs-http-client@^60.0.1'
+        'ipfs-http-client@^52.0.0'
     ];
 
     execSync(`npm install ${dependencies.join(' ')}`, { stdio: 'inherit', cwd: appPath });
